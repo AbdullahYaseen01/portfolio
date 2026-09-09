@@ -2426,3 +2426,383 @@ body {
     height: 1.75rem;
   }
 }
+
+/* ── Hero v2: cinematic editorial split ── */
+.hero-v2 {
+  position: relative;
+  isolation: isolate;
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  background: #070708;
+}
+
+.hero-v2-scene,
+.hero-v2-fallback {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+.hero-v2-fallback {
+  background:
+    radial-gradient(ellipse 70% 55% at 68% 42%, rgba(124, 58, 237, 0.28) 0%, transparent 62%),
+    radial-gradient(ellipse 50% 40% at 22% 70%, rgba(34, 211, 238, 0.12) 0%, transparent 70%),
+    #070708;
+}
+
+.hero-v2-wash {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background:
+    linear-gradient(90deg, rgba(7, 7, 8, 0.88) 0%, rgba(7, 7, 8, 0.55) 42%, rgba(7, 7, 8, 0.18) 70%, rgba(7, 7, 8, 0.45) 100%),
+    linear-gradient(180deg, rgba(7, 7, 8, 0.55) 0%, transparent 22%, transparent 78%, rgba(7, 7, 8, 0.92) 100%);
+}
+
+.hero-v2-grain {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  opacity: 0.18;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+.hero-v2-corners {
+  position: absolute;
+  inset: 5.5rem 1.25rem 4.25rem;
+  z-index: 3;
+  pointer-events: none;
+}
+
+.hero-v2-corners span {
+  position: absolute;
+  width: 1.35rem;
+  height: 1.35rem;
+  border: 1px solid rgba(255, 255, 255, 0.22);
+}
+
+.hero-v2-corners span:nth-child(1) { top: 0; left: 0; border-right: 0; border-bottom: 0; }
+.hero-v2-corners span:nth-child(2) { top: 0; right: 0; border-left: 0; border-bottom: 0; }
+.hero-v2-corners span:nth-child(3) { bottom: 0; left: 0; border-right: 0; border-top: 0; }
+.hero-v2-corners span:nth-child(4) { bottom: 0; right: 0; border-left: 0; border-top: 0; }
+
+.hero-v2-stage {
+  position: relative;
+  z-index: 4;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: min(1240px, calc(100% - 2rem));
+  margin: 0 auto;
+  padding: 7.25rem 0 5.5rem;
+}
+
+.hero-v2-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1.35rem;
+}
+
+.hero-v2-live,
+.hero-v2-index,
+.hero-v2-kicker,
+.hero-v2-panel-label,
+.hero-v2-roles span,
+.hero-v2-rail-track span,
+.hero-v2-scroll {
+  font-size: 0.68rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+}
+
+.hero-v2-live {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: #67e8f9;
+}
+
+.hero-v2-live::before {
+  content: '';
+  width: 0.45rem;
+  height: 0.45rem;
+  border-radius: 999px;
+  background: #22d3ee;
+  box-shadow: 0 0 12px #22d3ee;
+  animation: hero-v2-pulse 1.7s ease-in-out infinite;
+}
+
+.hero-v2-index {
+  color: rgba(244, 242, 250, 0.45);
+}
+
+.hero-v2-kicker {
+  color: rgba(244, 242, 250, 0.62);
+  margin: 0 0 0.85rem;
+}
+
+.hero-v2-name {
+  margin: 0;
+  perspective: 700px;
+}
+
+.hero-v2-name-line {
+  display: block;
+  font-family: var(--font-display);
+  font-size: clamp(3.6rem, 13vw, 9.4rem);
+  line-height: 0.86;
+  letter-spacing: -0.04em;
+}
+
+.hero-v2-name-line--gradient {
+  background: linear-gradient(120deg, #67e8f9 0%, #818cf8 42%, #c084fc 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  filter: drop-shadow(0 0 28px rgba(124, 58, 237, 0.35));
+}
+
+.hero-v2-name-line--white {
+  color: #f8f7fb;
+  text-shadow: 0 12px 40px rgba(0, 0, 0, 0.45);
+}
+
+.hero-v2-letter {
+  display: inline-block;
+  will-change: transform, opacity;
+}
+
+.hero-v2-body {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.75rem;
+  margin-top: 1.6rem;
+  align-items: stretch;
+}
+
+.hero-v2-copy {
+  max-width: 38rem;
+}
+
+.hero-v2-tagline {
+  margin: 0 0 0.85rem;
+  font-family: var(--font-display);
+  font-size: clamp(1.35rem, 2.6vw, 2rem);
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  color: #f4f2fa;
+}
+
+.hero-v2-tagline span {
+  display: block;
+  background: linear-gradient(90deg, #22d3ee, #a78bfa);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.hero-v2-bio {
+  margin: 0 0 1.4rem;
+  max-width: 34rem;
+  color: #c9c4d6;
+  font-size: 1.02rem;
+  line-height: 1.65;
+}
+
+.hero-v2-cta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.hero-v2-panel {
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(10, 10, 14, 0.62);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  border-radius: 1.35rem;
+  padding: 1.15rem 1.2rem 1.05rem;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.06);
+}
+
+.hero-v2-panel-label {
+  margin: 0 0 0.85rem;
+  color: #22d3ee;
+}
+
+.hero-v2-stats {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 0.15rem;
+}
+
+.hero-v2-stats li {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  align-items: baseline;
+  gap: 0.85rem;
+  padding: 0.7rem 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.hero-v2-stats li:last-child {
+  border-bottom: 0;
+}
+
+.hero-v2-stats strong {
+  font-family: var(--font-display);
+  font-size: clamp(1.7rem, 3vw, 2.35rem);
+  letter-spacing: -0.04em;
+  line-height: 1;
+  background: linear-gradient(180deg, #fff, #c4b5fd);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.hero-v2-stats span {
+  color: #b7b1c7;
+  font-size: 0.82rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.hero-v2-roles {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin-top: 0.95rem;
+}
+
+.hero-v2-roles span {
+  padding: 0.38rem 0.62rem;
+  border-radius: 999px;
+  border: 1px solid rgba(167, 139, 250, 0.35);
+  color: #ddd6fe;
+  background: rgba(124, 58, 237, 0.12);
+  letter-spacing: 0.12em;
+  font-size: 0.58rem;
+}
+
+.hero-v2-rail {
+  position: relative;
+  z-index: 4;
+  overflow: hidden;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(7, 7, 8, 0.72);
+  padding: 0.85rem 0;
+  mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+}
+
+.hero-v2-rail-track {
+  display: flex;
+  gap: 2.4rem;
+  width: max-content;
+  animation: hero-v2-rail 26s linear infinite;
+}
+
+.hero-v2-rail-track span {
+  color: rgba(244, 242, 250, 0.72);
+}
+
+.hero-v2-rail-track span::before {
+  content: '◆';
+  margin-right: 2.4rem;
+  color: #22d3ee;
+}
+
+.hero-v2-scroll {
+  position: absolute;
+  z-index: 5;
+  left: 1.4rem;
+  bottom: 4.6rem;
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  color: rgba(244, 242, 250, 0.55);
+  background: none;
+  border: 0;
+  padding: 0;
+  cursor: pointer;
+}
+
+.hero-v2-scroll i {
+  display: block;
+  width: 1px;
+  height: 2.1rem;
+  background: linear-gradient(#22d3ee, transparent);
+  animation: hero-v2-line 1.8s ease-in-out infinite;
+}
+
+@keyframes hero-v2-pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.4; transform: scale(0.72); }
+}
+
+@keyframes hero-v2-rail {
+  to { transform: translateX(-50%); }
+}
+
+@keyframes hero-v2-line {
+  0%, 100% { transform: scaleY(1); opacity: 1; }
+  50% { transform: scaleY(0.45); opacity: 0.4; }
+}
+
+@media (min-width: 900px) {
+  .hero-v2-stage {
+    width: min(1240px, calc(100% - 4.5rem));
+    padding-top: 7.5rem;
+  }
+
+  .hero-v2-body {
+    grid-template-columns: minmax(0, 1.15fr) minmax(240px, 0.72fr);
+    gap: 2.5rem;
+    align-items: end;
+  }
+
+  .hero-v2-scroll {
+    left: 2.2rem;
+    bottom: 4.8rem;
+  }
+
+  .hero-v2-corners {
+    inset: 5.75rem 1.75rem 4.4rem;
+  }
+}
+
+@media (max-width: 639px) {
+  .hero-v2-index {
+    display: none;
+  }
+
+  .hero-v2-scroll {
+    display: none;
+  }
+
+  .hero-v2-name-line {
+    font-size: clamp(3.1rem, 18vw, 4.4rem);
+  }
+
+  .hero-v2-cta > * {
+    flex: 1 1 10rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-v2-rail-track,
+  .hero-v2-live::before,
+  .hero-v2-scroll i {
+    animation: none;
+  }
+}

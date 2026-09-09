@@ -10,16 +10,7 @@ const HeroScene = lazy(() =>
 )
 
 function HeroScenePlaceholder() {
-  return (
-    <div
-      className="absolute inset-0"
-      style={{
-        background:
-          'radial-gradient(ellipse 70% 55% at 50% 42%, rgba(124,58,237,0.22) 0%, rgba(34,211,238,0.08) 45%, transparent 72%)',
-      }}
-      aria-hidden="true"
-    />
-  )
+  return <div className="hero-v2-fallback" aria-hidden="true" />
 }
 
 function shouldLoadHeroScene() {
@@ -30,55 +21,21 @@ function shouldLoadHeroScene() {
   return true
 }
 
-const ROLE_PILLS = [
-  {
-    label: 'Full-Stack Developer',
-    gradient: 'from-cyan/25 to-blue-500/10',
-    border: 'border-cyan/40',
-    text: 'text-cyan',
-    glow: 'rgba(34, 211, 238, 0.2)',
-  },
-  {
-    label: 'AI Engineer',
-    gradient: 'from-pink/25 to-fuchsia-500/10',
-    border: 'border-pink/40',
-    text: 'text-pink-300',
-    glow: 'rgba(244, 114, 182, 0.2)',
-  },
-  {
-    label: 'Problem Solver',
-    gradient: 'from-violet/25 to-indigo-500/10',
-    border: 'border-violet/40',
-    text: 'text-violet-300',
-    glow: 'rgba(124, 58, 237, 0.2)',
-  },
-] as const
+const ROLES = ['Full-Stack Developer', 'AI Engineer', 'Computer Vision']
 
 const TICKER = [
   'React',
   'Next.js',
   'TypeScript',
+  'Node.js',
+  'Python',
   'YOLO',
   'OpenCV',
-  'Node.js',
   'Three.js',
-  'Python',
 ]
-
-const NAME_PARTS = [
-  { text: 'Kevin', variant: 'gradient' as const },
-  { text: 'Kyle', variant: 'white' as const },
-]
-
-const BIO_SNIPPET =
-  'I build interfaces that convert and AI systems that see — from React & Next.js to YOLO & OpenCV, shipped and running in production.'
-
-const FULL_NAME = 'Kevin Kyle'
 
 export function Hero() {
-  const contentRef = useRef<HTMLDivElement>(null)
-  const pillsRef = useRef<HTMLDivElement>(null)
-  const bioRef = useRef<HTMLParagraphElement>(null)
+  const stageRef = useRef<HTMLDivElement>(null)
   const nameRef = useRef<HTMLHeadingElement>(null)
   const reduced = useReducedMotion()
   const [mouse, setMouse] = useState({ x: 0, y: 0 })
@@ -105,7 +62,7 @@ export function Hero() {
       }
     }
 
-    const timer = setTimeout(enable, 500)
+    const timer = setTimeout(enable, 400)
     return () => {
       cancelled = true
       clearTimeout(timer)
@@ -127,40 +84,19 @@ export function Hero() {
   useEffect(() => {
     if (reduced) return
 
-    const tl = gsap.timeline({ delay: 0.15 })
+    const tl = gsap.timeline({ delay: 0.12 })
+    const letters = nameRef.current?.querySelectorAll('.hero-v2-letter') ?? []
+    const reveals = stageRef.current?.querySelectorAll('.hero-v2-reveal') ?? []
 
     tl.fromTo(
-      pillsRef.current?.children ?? [],
-      { opacity: 0, y: 16, scale: 0.95 },
-      { opacity: 1, y: 0, scale: 1, duration: 0.55, ease: 'power3.out', stagger: 0.08 }
-    )
-
-    if (nameRef.current) {
-      const letters = nameRef.current.querySelectorAll('.hero-letter')
-      tl.fromTo(
-        letters,
-        { opacity: 0, y: 24 },
-        {
-          opacity: 1,
-          y: 0,
-          duration: 0.65,
-          ease: 'power3.out',
-          stagger: 0.03,
-        },
-        '-=0.3'
-      )
-    }
-
-    tl.fromTo(
-      contentRef.current?.querySelectorAll('.hero-reveal') ?? [],
-      { opacity: 0, y: 20 },
-      { opacity: 1, y: 0, duration: 0.75, stagger: 0.08, ease: 'power3.out' },
-      '-=0.4'
+      letters,
+      { opacity: 0, y: 36, rotateX: 18 },
+      { opacity: 1, y: 0, rotateX: 0, duration: 0.7, ease: 'power3.out', stagger: 0.028 }
     ).fromTo(
-      bioRef.current,
-      { opacity: 0, y: 12 },
-      { opacity: 1, y: 0, duration: 0.6, ease: 'power3.out' },
-      '-=0.3'
+      reveals,
+      { opacity: 0, y: 18 },
+      { opacity: 1, y: 0, duration: 0.7, stagger: 0.07, ease: 'power3.out' },
+      '-=0.35'
     )
 
     return () => {
@@ -171,8 +107,8 @@ export function Hero() {
   const tickerItems = [...TICKER, ...TICKER]
 
   return (
-    <section id="hero" className="hero-immersive" aria-label="Hero">
-      <div className="hero-scene-layer" aria-hidden="true">
+    <section id="hero" className="hero-v2" aria-label="Hero">
+      <div className="hero-v2-scene" aria-hidden="true">
         {enableScene ? (
           <Suspense fallback={<HeroScenePlaceholder />}>
             <HeroScene mouse={mouse} />
@@ -182,77 +118,52 @@ export function Hero() {
         )}
       </div>
 
-      <div className="hero-top-scrim" aria-hidden="true" />
-      <div className="hero-immersive-vignette" aria-hidden="true" />
-      <div className="hero-immersive-fade-bottom" aria-hidden="true" />
+      <div className="hero-v2-wash" aria-hidden="true" />
+      <div className="hero-v2-grain" aria-hidden="true" />
 
-      <div ref={contentRef} className="hero-overlay hero-overlay--center">
-        <div className="hero-overlay-inner">
-          <div className="hero-overlay-left">
-            <p className="hero-live-pill hero-reveal">Available for new projects</p>
+      <div className="hero-v2-corners" aria-hidden="true">
+        <span />
+        <span />
+        <span />
+        <span />
+      </div>
 
-            <h1 ref={nameRef} className="hero-full-name hero-name-split" aria-label={FULL_NAME}>
-              {NAME_PARTS.map((part) => (
-                <span
-                  key={part.text}
-                  className={part.variant === 'gradient' ? 'first' : 'last'}
-                >
-                  {part.text.split('').map((char, i) => (
-                    <span
-                      key={`${part.text}-${i}`}
-                      className={`hero-letter inline-block ${
-                        part.variant === 'gradient' ? 'hero-letter-gradient' : 'hero-letter-white'
-                      }`}
-                    >
-                      {char}
-                    </span>
-                  ))}
-                </span>
-              ))}
-            </h1>
+      <div ref={stageRef} className="hero-v2-stage">
+        <div className="hero-v2-meta hero-v2-reveal">
+          <span className="hero-v2-live">Available for work</span>
+          <span className="hero-v2-index">01 / Introduction</span>
+        </div>
 
-            <div ref={pillsRef} className="hero-role-pills">
-              {ROLE_PILLS.map((role) => (
-                <span
-                  key={role.label}
-                  className={`hero-role-pill bg-gradient-to-br ${role.gradient} ${role.border}`}
-                  style={{ '--role-glow': role.glow } as React.CSSProperties}
-                >
-                  <span className={`hero-role-pill-dot ${role.text}`} />
-                  <span className={role.text}>{role.label}</span>
-                </span>
-              ))}
-            </div>
+        <p className="hero-v2-kicker hero-v2-reveal">{ROLES.join('  ·  ')}</p>
 
-            <p className="hero-tagline-italic hero-reveal">
+        <h1 ref={nameRef} className="hero-v2-name" aria-label="Kevin Kyle">
+          <span className="hero-v2-name-line hero-v2-name-line--gradient">
+            {'Kevin'.split('').map((char, i) => (
+              <span key={`k-${i}`} className="hero-v2-letter">
+                {char}
+              </span>
+            ))}
+          </span>
+          <span className="hero-v2-name-line hero-v2-name-line--white">
+            {'Kyle'.split('').map((char, i) => (
+              <span key={`y-${i}`} className="hero-v2-letter">
+                {char}
+              </span>
+            ))}
+          </span>
+        </h1>
+
+        <div className="hero-v2-body">
+          <div className="hero-v2-copy">
+            <p className="hero-v2-tagline hero-v2-reveal">
               Interfaces that convert.
-              <br />
-              <span className="hero-tagline-accent">AI that sees.</span>
+              <span>AI that sees.</span>
             </p>
-
-            <div className="hero-stats hero-reveal">
-              {PROFILE.stats.map((stat) => (
-                <div key={stat.label} className="hero-stat-pill">
-                  <span className="hero-stat-value">
-                    {stat.value}
-                    {stat.suffix}
-                  </span>
-                  <span className="hero-stat-label">{stat.label}</span>
-                </div>
-              ))}
-            </div>
-
-            <div className="hero-ticker hero-reveal" aria-hidden="true">
-              <div className="hero-ticker-track">
-                {tickerItems.map((item, i) => (
-                  <span key={`${item}-${i}`} className="hero-ticker-item">
-                    {item}
-                  </span>
-                ))}
-              </div>
-            </div>
-
-            <div className="hero-cta-row hero-reveal">
+            <p className="hero-v2-bio hero-v2-reveal">
+              I ship pixel-perfect React sites and real-time computer vision
+              systems — detection, tracking, OCR — already running in production.
+            </p>
+            <div className="hero-v2-cta hero-v2-reveal">
               <MagneticButton onClick={() => scrollTo('#projects')}>View Work</MagneticButton>
               <MagneticButton variant="outline" onClick={() => scrollTo('#contact')}>
                 Contact
@@ -260,20 +171,44 @@ export function Hero() {
             </div>
           </div>
 
-          <p ref={bioRef} className="hero-bio-bar hero-bio-bar--immersive hero-bio-in-grid">
-            {BIO_SNIPPET}
-          </p>
+          <aside className="hero-v2-panel hero-v2-reveal" aria-label="Highlights">
+            <p className="hero-v2-panel-label">Selected signal</p>
+            <ul className="hero-v2-stats">
+              {PROFILE.stats.map((stat) => (
+                <li key={stat.label}>
+                  <strong>
+                    {stat.value}
+                    {stat.suffix}
+                  </strong>
+                  <span>{stat.label}</span>
+                </li>
+              ))}
+            </ul>
+            <div className="hero-v2-roles">
+              {ROLES.map((role) => (
+                <span key={role}>{role}</span>
+              ))}
+            </div>
+          </aside>
+        </div>
+      </div>
+
+      <div className="hero-v2-rail" aria-hidden="true">
+        <div className="hero-v2-rail-track">
+          {tickerItems.map((item, i) => (
+            <span key={`${item}-${i}`}>{item}</span>
+          ))}
         </div>
       </div>
 
       <button
         type="button"
-        onClick={() => scrollTo('#about')}
-        className="hero-scroll-cue"
-        aria-label="Scroll to about section"
+        onClick={() => scrollTo('#projects')}
+        className="hero-v2-scroll"
+        aria-label="Scroll to work"
       >
         <span>Scroll</span>
-        <span className="hero-scroll-line" />
+        <i />
       </button>
     </section>
   )
