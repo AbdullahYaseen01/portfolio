@@ -1,5 +1,5 @@
 export const PROFILE = {
-  email: 'abdullahyaseen6500@gmail.com',
+  email: 'kevinkylesumagaysay6@gmail.com',
   stats: [
     { label: 'Projects Shipped', value: 25, suffix: '+' },
     { label: 'Live Sites', value: 8, suffix: '' },
@@ -207,9 +207,3 @@ export const APPROACH = [
   },
 ]
 
-export const SOCIALS = {
-  linkedin: 'https://www.linkedin.com/in/abdullah-yaseen1',
-  github: 'https://github.com/AbdullahYaseen01',
-  whatsapp: 'https://wa.me/923192560463',
-  whatsappDisplay: '+92 319 2560463',
-}

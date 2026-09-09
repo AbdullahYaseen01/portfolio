@@ -18,9 +18,9 @@ export function CaseStudyPage() {
 
   useEffect(() => {
     if (!study) return
-    document.title = `${study.title} — Abdullah Yaseen`
+    document.title = `${study.title} — Kevin Kyle`
     return () => {
-      document.title = 'Abdullah Yaseen — Full-Stack Developer & AI Engineer'
+      document.title = 'Kevin Kyle — Full-Stack Developer & AI Engineer'
     }
   }, [study])
 

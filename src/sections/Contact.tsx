@@ -2,8 +2,7 @@ import { useEffect, useRef, useState } from 'react'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { MagneticButton } from '../components/MagneticButton'
-import { ResumeButton } from '../components/ResumeButton'
-import { PROFILE, SOCIALS } from '../data/content'
+import { PROFILE } from '../data/content'
 import { useReducedMotion } from '../hooks/useReducedMotion'
 
 gsap.registerPlugin(ScrollTrigger)
@@ -94,17 +93,7 @@ export function Contact() {
 
         <div className="flex flex-col sm:flex-row flex-wrap items-stretch sm:items-center justify-center gap-3 sm:gap-4 mb-6 max-w-sm sm:max-w-none mx-auto">
           <MagneticButton className="w-full sm:w-auto" onClick={copyEmail} aria-label="Copy email address">
-            {copied ? 'Copied!' : 'Copy Email'}
-          </MagneticButton>
-          <ResumeButton className="w-full sm:w-auto !justify-center" label="Download Resume" />
-          <MagneticButton className="w-full sm:w-auto" as="a" href={SOCIALS.linkedin} variant="outline">
-            LinkedIn ↗
-          </MagneticButton>
-          <MagneticButton className="w-full sm:w-auto" as="a" href={SOCIALS.github} variant="outline">
-            GitHub ↗
-          </MagneticButton>
-          <MagneticButton className="w-full sm:w-auto" as="a" href={SOCIALS.whatsapp} variant="outline">
-            WhatsApp ↗
+            {copied ? 'Copied!' : PROFILE.email}
           </MagneticButton>
         </div>
 
@@ -118,11 +107,11 @@ export function Contact() {
             }}
             aria-hidden="true"
           >
-            ABDULLAH YASEEN
+            KEVIN KYLE
           </div>
 
           <p className="mt-8 text-[10px] tracking-[0.2em] uppercase text-text-muted">
-            © {new Date().getFullYear()} Abdullah Yaseen · Built with React & Three.js
+            © {new Date().getFullYear()} Kevin Kyle · Built with React & Three.js
           </p>
         </div>
       </div>

@@ -1,18 +1,15 @@
-import { SOCIALS } from '../data/content'
-
-const SITE_URL = 'https://abdullahyaseen.dev'
+const SITE_URL = 'https://kevinkylesumagaysay.dev'
 
 export function JsonLd() {
   const schema = {
     '@context': 'https://schema.org',
     '@type': 'Person',
-    name: 'Abdullah Yaseen',
+    name: 'Kevin Kyle',
     jobTitle: 'Full-Stack Developer & AI / Computer Vision Engineer',
     description:
       'I build interfaces that convert — and AI that sees. Full-stack web development and real-time computer vision systems.',
     url: SITE_URL,
-    email: 'abdullahyaseen6500@gmail.com',
-    sameAs: [SOCIALS.linkedin, SOCIALS.github],
+    email: 'kevinkylesumagaysay6@gmail.com',
     knowsAbout: [
       'React',
       'TypeScript',

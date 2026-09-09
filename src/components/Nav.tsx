@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
-import { ResumeButton } from './ResumeButton'
 import { AvailabilityBadge } from './AvailabilityBadge'
 import { scrollTo } from '../providers/SmoothScrollProvider'
 import { useActiveSection } from '../hooks/useActiveSection'
@@ -9,7 +8,6 @@ const LINKS = [
   { label: 'Work', href: '#projects', id: 'projects' },
   { label: 'About', href: '#about', id: 'about' },
   { label: 'Experience', href: '#experience', id: 'experience' },
-  { label: 'Certificates', href: '#certificates', id: 'certificates' },
   { label: 'Expertise', href: '#expertise', id: 'expertise' },
   { label: 'Services', href: '#services', id: 'services' },
   { label: 'Stack', href: '#stack', id: 'stack' },
@@ -55,7 +53,7 @@ export function Nav() {
             className="font-display text-sm tracking-wider gradient-text focus:outline-none focus-visible:ring-2 focus-visible:ring-violet/50 rounded"
             data-cursor-hover
           >
-            AY
+            KK
           </Link>
 
           <div className="hidden lg:flex items-center gap-1">
@@ -81,11 +79,6 @@ export function Nav() {
 
           <div className="hidden md:flex items-center gap-3">
             <AvailabilityBadge className="hidden lg:inline-flex" />
-            <ResumeButton
-              variant="primary"
-              className="nav-resume-btn !px-5 !py-2.5 !text-xs !font-semibold"
-              label="Resume"
-            />
           </div>
 
           <button
@@ -109,11 +102,6 @@ export function Nav() {
         <div className="nav-mobile-panel md:hidden mx-4 mt-2 glass rounded-2xl p-4">
             <div className="mb-4 flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
               <AvailabilityBadge className="w-full sm:w-auto justify-center" />
-              <ResumeButton
-                variant="primary"
-                className="nav-resume-btn w-full sm:w-auto !justify-center !px-5 !py-3 !text-xs"
-                label="Download Resume ↗"
-              />
             </div>
             {LINKS.map((link) => (
               <button

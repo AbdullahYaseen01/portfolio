@@ -13,7 +13,7 @@ export const IMPACT_STATS = [
 export const TESTIMONIALS = [
   {
     quote:
-      'Abdullah delivered a site that actually converts — fast, polished, and exactly what we envisioned. He understood our brand from day one.',
+      'Delivered a site that actually converts — fast, polished, and exactly what we envisioned. Brand understood from day one.',
     name: 'Alex Nguyen',
     role: 'Founder',
     company: 'Autozy',

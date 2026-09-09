@@ -10,7 +10,6 @@ export function Preloader({ onComplete }: PreloaderProps) {
   const [counter, setCounter] = useState(0)
   const overlayRef = useRef<HTMLDivElement>(null)
   const curtainRef = useRef<HTMLDivElement>(null)
-  const nameRef = useRef<HTMLDivElement>(null)
   const reduced = useReducedMotion()
 
   useEffect(() => {
@@ -42,14 +41,7 @@ export function Preloader({ onComplete }: PreloaderProps) {
       },
     })
 
-    tl.to(nameRef.current, {
-      opacity: 1,
-      y: 0,
-      duration: 0.55,
-      ease: 'power3.out',
-      delay: 0.2,
-    })
-      .to({}, { duration: 0.25 })
+    tl.to({}, { duration: 0.55 })
       .to(curtainRef.current, {
         scaleY: 0,
         transformOrigin: 'top',
@@ -83,12 +75,6 @@ export function Preloader({ onComplete }: PreloaderProps) {
         <div className="font-display text-7xl md:text-9xl gradient-text tabular-nums leading-none">
           {counter}
           <span className="text-3xl md:text-5xl opacity-60">%</span>
-        </div>
-        <div
-          ref={nameRef}
-          className="mt-8 font-display text-lg md:text-xl tracking-[0.3em] text-text-muted opacity-0 translate-y-4"
-        >
-          ABDULLAH YASEEN
         </div>
       </div>
       <div

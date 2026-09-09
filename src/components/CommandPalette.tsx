@@ -2,8 +2,7 @@ import { useEffect, useState, useCallback } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { motion, AnimatePresence } from 'framer-motion'
 import { scrollTo } from '../providers/SmoothScrollProvider'
-import { RESUME_URL } from './ResumeButton'
-import { PROFILE, SOCIALS } from '../data/content'
+import { PROFILE } from '../data/content'
 import { CASE_STUDY_SLUGS, CASE_STUDIES } from '../data/caseStudies'
 
 interface Command {
@@ -33,7 +32,6 @@ export function CommandPalette() {
     { id: 'work', label: 'Featured Work', group: 'Navigation', action: () => goHome('#projects') },
     { id: 'about', label: 'About', group: 'Navigation', action: () => goHome('#about') },
     { id: 'experience', label: 'Experience', group: 'Navigation', action: () => goHome('#experience') },
-    { id: 'certificates', label: 'Certificates', group: 'Navigation', action: () => goHome('#certificates') },
     { id: 'expertise', label: 'Expertise', group: 'Navigation', action: () => goHome('#expertise') },
     { id: 'services', label: 'Services', group: 'Navigation', action: () => goHome('#services') },
     { id: 'stack', label: 'Tech Stack', group: 'Navigation', action: () => goHome('#stack') },
@@ -53,33 +51,6 @@ export function CommandPalette() {
       group: 'Actions',
       action: () => {
         navigator.clipboard.writeText(PROFILE.email)
-        setOpen(false)
-      },
-    },
-    {
-      id: 'linkedin',
-      label: 'Open LinkedIn',
-      group: 'Links',
-      action: () => {
-        window.open(SOCIALS.linkedin, '_blank')
-        setOpen(false)
-      },
-    },
-    {
-      id: 'github',
-      label: 'Open GitHub',
-      group: 'Links',
-      action: () => {
-        window.open(SOCIALS.github, '_blank')
-        setOpen(false)
-      },
-    },
-    {
-      id: 'resume',
-      label: 'Download Resume',
-      group: 'Actions',
-      action: () => {
-        window.open(RESUME_URL, '_blank', 'noopener,noreferrer')
         setOpen(false)
       },
     },

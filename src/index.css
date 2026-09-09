@@ -1713,6 +1713,94 @@ body {
   align-items: flex-end;
 }
 
+.hero-overlay--center {
+  align-items: center;
+}
+
+.hero-overlay--center .hero-overlay-inner {
+  grid-template-columns: 1fr;
+  align-content: center;
+  justify-items: center;
+  text-align: center;
+  padding-top: 6rem;
+}
+
+.hero-overlay--center .hero-overlay-left,
+.hero-overlay--center .hero-overlay-right {
+  text-align: center;
+  align-items: center;
+  max-width: 44rem;
+  margin: 0 auto;
+}
+
+.hero-overlay--center .hero-role-pills,
+.hero-overlay--center .hero-stats,
+.hero-overlay--center .hero-cta-row {
+  justify-content: center;
+}
+
+.hero-live-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.35rem 0.85rem;
+  border-radius: 9999px;
+  font-size: 0.68rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #67e8f9;
+  border: 1px solid rgba(34, 211, 238, 0.35);
+  background: rgba(34, 211, 238, 0.08);
+  pointer-events: auto;
+}
+
+.hero-live-pill::before {
+  content: '';
+  width: 0.45rem;
+  height: 0.45rem;
+  border-radius: 9999px;
+  background: #22d3ee;
+  box-shadow: 0 0 10px #22d3ee;
+  animation: hero-live-pulse 1.6s ease-in-out infinite;
+}
+
+@keyframes hero-live-pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.45; transform: scale(0.7); }
+}
+
+.hero-ticker {
+  overflow: hidden;
+  width: min(90vw, 38rem);
+  mask-image: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent);
+  pointer-events: none;
+}
+
+.hero-ticker-track {
+  display: flex;
+  gap: 1.75rem;
+  width: max-content;
+  animation: hero-ticker 22s linear infinite;
+}
+
+.hero-ticker-item {
+  font-size: 0.72rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.45);
+  white-space: nowrap;
+}
+
+.hero-ticker-item::before {
+  content: '✦';
+  margin-right: 1.75rem;
+  color: rgba(167, 139, 250, 0.7);
+}
+
+@keyframes hero-ticker {
+  to { transform: translateX(-50%); }
+}
+
 .hero-overlay-inner {
   width: 100%;
   max-width: 1400px;
@@ -1754,17 +1842,29 @@ body {
 }
 
 @media (min-width: 1024px) {
-  .hero-overlay-left {
-    text-align: left;
-    align-items: flex-start;
-    max-width: min(38vw, 24rem);
-  }
-
   .hero-overlay-right {
     text-align: right;
     align-items: flex-end;
     max-width: min(34vw, 20rem);
     margin-left: auto;
+  }
+
+  .hero-overlay--center .hero-overlay-inner {
+    grid-template-columns: 1fr;
+    align-content: center;
+    justify-items: center;
+  }
+
+  .hero-overlay--center .hero-overlay-left,
+  .hero-overlay--center .hero-overlay-right {
+    text-align: center;
+    align-items: center;
+    max-width: 46rem;
+    margin: 0 auto;
+  }
+
+  .hero-overlay--center .hero-role-pills {
+    justify-content: center;
   }
 }
 
